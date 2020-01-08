@@ -4,7 +4,6 @@ namespace Innoflash\Events\Services;
 
 use Innoflash\Events\Models\Event;
 use InnoFlash\LaraStart\Services\CRUDServices;
-use Illuminate\Database\Eloquent\Model as ParentModel;
 
 class EventsService extends CRUDServices
 {
@@ -50,9 +49,6 @@ class EventsService extends CRUDServices
      */
     function getParentRelationship()
     {
-        return [
-            ParentModel::class,
-            'relationshipName',
-        ];
+        return auth()->user()->events();
     }
 }
