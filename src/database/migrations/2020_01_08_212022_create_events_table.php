@@ -14,8 +14,17 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('id')->index()->primary();
+            $table->string('ministry_id', 150)->index();
+            $table->string('name');
+            $table->text('description');
+            $table->json('location');
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->boolean('published')->default(false);
             $table->timestamps();
+
+            $table->foreign('ministry_id')->references('id')->on('ministries')->onDelete('cascade');
         });
     }
 

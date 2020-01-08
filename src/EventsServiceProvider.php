@@ -22,10 +22,16 @@ class EventsServiceProvider extends ServiceProvider
         $this->registerRoutes(__DIR__ . '/routes/events.php', __DIR__ . '/routes/source.php');
 
         $this->setUpSourceFiles(function () {
+            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
             $this->publishes([
-                __DIR__ . '/../config/faithgen-events.php' => config_path('faithgen-events.php'),
-            ], 'faithgen-events-config');
+                __DIR__ . '/database/migrations/' => database_path('migrations'),
+            ], 'faithgen-events-migrations');
         });
+
+        $this->publishes([
+            __DIR__ . '/../config/faithgen-events.php' => config_path('faithgen-events.php'),
+        ], 'faithgen-events-config');
 
         $this->app->singleton(EventsService::class, EventsService::class);
     }
