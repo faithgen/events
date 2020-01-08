@@ -5,6 +5,7 @@ namespace Innoflash\Events;
 use FaithGen\SDK\Traits\ConfigTrait;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Innoflash\Events\Services\EventsService;
 
 class EventsServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class EventsServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/faithgen-events.php' => config_path('faithgen-events.php'),
             ], 'faithgen-events-config');
         });
+
+        $this->app->singleton(EventsService::class, EventsService::class);
     }
 
     /**
