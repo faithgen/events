@@ -2,11 +2,13 @@
 
 namespace Innoflash\Events;
 
+use FaithGen\SDK\Traits\ConfigTrait;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class EventsServiceProvider extends ServiceProvider
 {
+    use ConfigTrait;
     /**
      * Bootstrap any application services.
      *
@@ -14,36 +16,28 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/Events.php', 'events');
-        $this->publishThings();
-        // $this->loadViewsFrom(__DIR__.'/resources/views', 'events');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->registerRoutes();
-    }
+        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-events.php', 'faithgen-events');
 
-    /**
-     * Register the package routes.
-     *
-     * @return void
-     */
-    private function registerRoutes()
-    {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+        $this->registerRoutes(__DIR__ . '/routes/events.php', __DIR__ . '/routes/source.php');
+
+        $this->setUpSourceFiles(function () {
+            $this->publishes([
+                __DIR__ . '/../config/faithgen-events.php' => config_path('faithgen-events.php'),
+            ], 'faithgen-events-config');
         });
     }
 
     /**
-    * Get the Blogg route group configuration array.
-    *
-    * @return array
-    */
+     * Get the Blogg route group configuration array.
+     *
+     * @return array
+     */
     private function routeConfiguration()
     {
         return [
-            'namespace'  => "Innoflash\Events\Http\Controllers",
-            'middleware' => 'api',
-            'prefix'     => 'api'
+            'prefix' => config('faithgen-events.prefix'),
+            'namespace' => "FaithGen\Events\Http\Controllers",
+            'middleware' => config('faithgen-events.middlewares'),
         ];
     }
 
@@ -56,15 +50,7 @@ class EventsServiceProvider extends ServiceProvider
     {
         // Register facade
         $this->app->singleton('events', function () {
-            return new Events;
+            return new EventsFacade;
         });
-    }
-
-    public function publishThings(){
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/Events.php' => config_path('Events.php'),
-            ], 'config');
-        }
     }
 }
