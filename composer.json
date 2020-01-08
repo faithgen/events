@@ -43,7 +43,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Innoflash\\Events\\EventsServiceProvider"
+                "Innoflash\\Events\\EventsServiceProvider",
+                "Innoflash\\Events\\Providers\\AuthServiceProvider"
             ],
             "aliases": {
                 "Innoflash": "Innoflash\\Events\\EventsFacade"

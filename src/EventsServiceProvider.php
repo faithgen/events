@@ -52,8 +52,8 @@ class EventsServiceProvider extends ServiceProvider
     public function register()
     {
         // Register facade
-        $this->app->singleton('events', function () {
-            return new EventsFacade;
-        });
+        // $this->app->singleton('events', function () {
+        //     return new EventsFacade();
+        //  });
     }
 }
