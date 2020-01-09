@@ -8,4 +8,5 @@ Route::prefix('events')
     ->group(function () {
         Route::post('', [EventController::class, 'create']);
         Route::post('update', [EventController::class, 'update']);
+        Route::post('toggle-publish', [EventController::class, 'togglePublish']);
     });

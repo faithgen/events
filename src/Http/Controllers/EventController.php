@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Innoflash\Events\Http\Requests\CreateRequest;
+use Innoflash\Events\Http\Requests\TogglePublishRequest;
 use Innoflash\Events\Http\Requests\UpdateRequest;
 use Innoflash\Events\Services\EventsService;
 use Intervention\Image\Exception\NotFoundException;
@@ -47,5 +48,10 @@ class EventController extends Controller
     public function update(UpdateRequest $request)
     {
         return $this->eventsService->update($request->validated(), 'Event updated successfully!');
+    }
+
+    public function togglePublish(TogglePublishRequest $request)
+    {
+        return $this->eventsService->update($request->validated(), 'Event publish status changed successfully!');
     }
 }
