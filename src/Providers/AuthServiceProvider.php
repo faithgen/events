@@ -2,9 +2,10 @@
 
 namespace Innoflash\Events\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Innoflash\Events\Models\Event;
+use Illuminate\Support\Facades\Gate;
 use Innoflash\Events\Policies\EventPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('event.create', [EventPolicy::class, 'create']);
     }
 
     /**

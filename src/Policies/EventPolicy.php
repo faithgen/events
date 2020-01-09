@@ -17,7 +17,7 @@ class EventPolicy
      * @param  \Innoflash\Events\Models\Event  $event
      * @return mixed
      */
-    public function view(Ministry $ministry, Event $event)
+    public static function view(Ministry $ministry, Event $event)
     {
         //
     }
@@ -28,9 +28,12 @@ class EventPolicy
      * @param  \  $ministry
      * @return mixed
      */
-    public function create(Ministry $ministry)
+    public static function create(Ministry $ministry)
     {
-        //
+        if ($ministry->account->level === 'Free') return false;
+        if ($ministry->events()->where(request()->only(['name', 'start', 'end']))->count())
+            abort(403, 'You already registered this event');
+        else return true;
     }
 
     /**
@@ -40,7 +43,7 @@ class EventPolicy
      * @param  \Innoflash\Events\Models\Event  $event
      * @return mixed
      */
-    public function update(Ministry $ministry, Event $event)
+    public static function update(Ministry $ministry, Event $event)
     {
         //
     }
@@ -52,31 +55,7 @@ class EventPolicy
      * @param  \Innoflash\Events\Models\Event  $event
      * @return mixed
      */
-    public function delete(Ministry $ministry, Event $event)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the ministry can restore the event.
-     *
-     * @param  \  $ministry
-     * @param  \Innoflash\Events\Models\Event  $event
-     * @return mixed
-     */
-    public function restore(Ministry $ministry, Event $event)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the ministry can permanently delete the event.
-     *
-     * @param  \  $ministry
-     * @param  \Innoflash\Events\Models\Event  $event
-     * @return mixed
-     */
-    public function forceDelete(Ministry $ministry, Event $event)
+    public static function delete(Ministry $ministry, Event $event)
     {
         //
     }
