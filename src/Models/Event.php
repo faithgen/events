@@ -13,8 +13,31 @@ class Event extends UuidModel
         'location' => 'array'
     ];
 
+    protected $hidden = [
+        'ministry_id',
+        'created_at',
+        'updated_at',
+    ];
+
     function getNameAttribute($val)
     {
         return ucwords($val);
+    }
+
+    function getDescriptionAttribute($val)
+    {
+        return ucfirst($val);
+    }
+
+    function scopePublished($query)
+    {
+        if (!config('faithgen-sdk.source'))
+            return $query->wherePublished(true);
+        else return $query;
+    }
+
+    function getPublishedAttribute($val)
+    {
+        return (bool) $val;
     }
 }

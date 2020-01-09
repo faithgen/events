@@ -2,11 +2,13 @@
 
 namespace Innoflash\Events\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Innoflash\Events\Http\Requests\CreateRequest;
 use Innoflash\Events\Services\EventsService;
 use Intervention\Image\Exception\NotFoundException;
+use Innoflash\Events\Http\Resources\Event as EventResource;
 
 class EventController extends Controller
 {
@@ -25,5 +27,19 @@ class EventController extends Controller
             else $params['location'] = auth()->user()->profile->location;
 
         return $this->eventsService->createFromParent($params, 'Event created successfully');
+    }
+
+    public function index(Request $request)
+    {
+        if ($request->has('date')) $date = Carbon::parse($request->date);
+        else $date = Carbon::now();
+
+        $events = auth()->user()->events()
+            ->whereDate('start', '>=', $date->startOfMonth())
+            ->whereDate('end', '<=', $date->endOfMonth())
+            ->published()
+            ->orderBy('start', 'asc')
+            ->get();
+        return EventResource::collection($events);
     }
 }
