@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('event.create', [EventPolicy::class, 'create']);
         Gate::define('event.update', [EventPolicy::class, 'update']);
+        Gate::define('event.delete', [EventPolicy::class, 'delete']);
     }
 
     /**

@@ -9,4 +9,5 @@ Route::prefix('events')
         Route::post('', [EventController::class, 'create']);
         Route::post('update', [EventController::class, 'update']);
         Route::post('toggle-publish', [EventController::class, 'togglePublish']);
+        Route::delete('', [EventController::class, 'destroy']);
     });

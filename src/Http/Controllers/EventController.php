@@ -5,11 +5,13 @@ namespace Innoflash\Events\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Innoflash\Events\Http\Requests\CreateRequest;
-use Innoflash\Events\Http\Requests\TogglePublishRequest;
-use Innoflash\Events\Http\Requests\UpdateRequest;
+use Innoflash\Events\Models\Event;
 use Innoflash\Events\Services\EventsService;
+use Innoflash\Events\Http\Requests\CreateRequest;
+use Innoflash\Events\Http\Requests\DeleteRequest;
+use Innoflash\Events\Http\Requests\UpdateRequest;
 use Intervention\Image\Exception\NotFoundException;
+use Innoflash\Events\Http\Requests\TogglePublishRequest;
 use Innoflash\Events\Http\Resources\Event as EventResource;
 
 class EventController extends Controller
@@ -53,5 +55,10 @@ class EventController extends Controller
     public function togglePublish(TogglePublishRequest $request)
     {
         return $this->eventsService->update($request->validated(), 'Event publish status changed successfully!');
+    }
+
+    public function destroy(DeleteRequest $request)
+    {
+        return $this->eventsService->destroy('Event deleted successfully!');
     }
 }

@@ -3,6 +3,7 @@
 namespace Innoflash\Events\Policies;
 
 use App\Models\Ministry;
+use Illuminate\Auth\Access\AuthorizationException;
 use Innoflash\Events\Models\Event;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -57,6 +58,6 @@ class EventPolicy
      */
     public static function delete(Ministry $ministry, Event $event)
     {
-        //
+        return $ministry->id === $event->ministry_id;
     }
 }
