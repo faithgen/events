@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Innoflash\Events\Http\Requests\CreateRequest;
+use Innoflash\Events\Http\Requests\UpdateRequest;
 use Innoflash\Events\Services\EventsService;
 use Intervention\Image\Exception\NotFoundException;
 use Innoflash\Events\Http\Resources\Event as EventResource;
@@ -41,5 +42,10 @@ class EventController extends Controller
             ->orderBy('start', 'asc')
             ->get();
         return EventResource::collection($events);
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        return $this->eventsService->update($request->validated(), 'Event updated successfully!');
     }
 }

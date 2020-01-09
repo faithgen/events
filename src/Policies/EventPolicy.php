@@ -45,7 +45,7 @@ class EventPolicy
      */
     public static function update(Ministry $ministry, Event $event)
     {
-        //
+        return $ministry->id === $event->ministry_id;
     }
 
     /**

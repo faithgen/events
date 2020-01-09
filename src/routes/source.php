@@ -7,4 +7,5 @@ Route::prefix('events')
     ->middleware('source.site')
     ->group(function () {
         Route::post('', [EventController::class, 'create']);
+        Route::post('update', [EventController::class, 'update']);
     });
