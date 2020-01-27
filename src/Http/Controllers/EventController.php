@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Innoflash\Events\Models\Event;
 use App\Http\Controllers\Controller;
+use FaithGen\SDK\Helpers\CommentHelper;
 use Innoflash\Events\Services\EventsService;
 use Innoflash\Events\Http\Requests\CreateRequest;
 use Innoflash\Events\Http\Requests\DeleteRequest;
 use Innoflash\Events\Http\Requests\UpdateRequest;
+use Innoflash\Events\Http\Requests\CommentRequest;
 use Intervention\Image\Exception\NotFoundException;
 use Innoflash\Events\Http\Requests\TogglePublishRequest;
 use Innoflash\Events\Http\Resources\Event as EventResource;
@@ -66,5 +68,16 @@ class EventController extends Controller
     {
         $this->authorize('event.view', $event);
         return new EventResource($event);
+    }
+
+    public function comments(Request $request, Event $event)
+    {
+        $this->authorize('event.view', $event);
+        return CommentHelper::getComments($event, $request);
+    }
+
+    public function comment(CommentRequest $request)
+    {
+        return CommentHelper::createComment($this->eventsService->getEvent(), $request);
     }
 }

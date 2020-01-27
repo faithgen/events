@@ -4,10 +4,11 @@ namespace Innoflash\Events\Models;
 
 use FaithGen\SDK\Models\UuidModel;
 use FaithGen\SDK\Traits\Relationships\Belongs\BelongsToMinistryTrait;
+use FaithGen\SDK\Traits\Relationships\Morphs\CommentableTrait;
 
 class Event extends UuidModel
 {
-    use BelongsToMinistryTrait;
+    use BelongsToMinistryTrait, CommentableTrait;
 
     protected $casts = [
         'location' => 'array'
