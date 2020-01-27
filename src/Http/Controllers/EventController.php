@@ -4,8 +4,8 @@ namespace Innoflash\Events\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Innoflash\Events\Models\Event;
+use App\Http\Controllers\Controller;
 use Innoflash\Events\Services\EventsService;
 use Innoflash\Events\Http\Requests\CreateRequest;
 use Innoflash\Events\Http\Requests\DeleteRequest;
@@ -60,5 +60,11 @@ class EventController extends Controller
     public function destroy(DeleteRequest $request)
     {
         return $this->eventsService->destroy('Event deleted successfully!');
+    }
+
+    public function view(Event $event)
+    {
+        $this->authorize('event.view', $event);
+        return new EventResource($event);
     }
 }
