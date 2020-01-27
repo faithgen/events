@@ -78,6 +78,8 @@ class EventController extends Controller
 
     public function comment(CommentRequest $request)
     {
+        if (Carbon::parse($this->eventsService->getEvent()->end)->isPast())
+            abort(400, 'This event is over, you can`t send anymore comments');
         return CommentHelper::createComment($this->eventsService->getEvent(), $request);
     }
 }
