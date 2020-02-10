@@ -29,7 +29,10 @@ class EventObserver
      */
     public function updated(Event $event)
     {
-        //
+        if (request()->has('banner')) {
+            $this->deleted($event);
+            event(new Saved($event, request('banner')));
+        }
     }
 
     /**
