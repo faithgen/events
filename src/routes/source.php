@@ -14,4 +14,5 @@ Route::prefix('events')
         Route::delete('banner/{event}', [EventController::class, 'destroyBanner']);
 
         Route::post('add-guest', [GuestController::class, 'create']);
+        Route::delete('guest/{guest}', [GuestController::class, 'destroy']);
     });
