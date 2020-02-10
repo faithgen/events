@@ -22,6 +22,11 @@ class Event extends UuidModel
         'updated_at',
     ];
 
+    function guests()
+    {
+        return $this->hasMany(Guest::class);
+    }
+
     function getNameAttribute($val)
     {
         return ucwords($val);

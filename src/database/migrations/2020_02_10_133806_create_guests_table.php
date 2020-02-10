@@ -16,6 +16,8 @@ class CreateGuestsTable extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->string('id')->index()->primary();
             $table->string('event_id', 150)->index();
+            $table->string('title');
+            $table->string('name');
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
