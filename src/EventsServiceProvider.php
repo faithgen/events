@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Innoflash\Events\Models\Event;
 use Innoflash\Events\Observers\EventObserver;
 use Innoflash\Events\Services\EventsService;
+use Innoflash\Events\Services\GuestService;
 
 class EventsServiceProvider extends ServiceProvider
 {
@@ -68,5 +69,6 @@ class EventsServiceProvider extends ServiceProvider
         //     return new EventsFacade();
         //  });
         $this->app->singleton(EventsService::class, EventsService::class);
+        $this->app->singleton(GuestService::class, GuestService::class);
     }
 }
