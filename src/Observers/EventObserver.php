@@ -48,26 +48,4 @@ class EventObserver
             $event->image()->delete();
         }
     }
-
-    /**
-     * Handle the event "restored" event.
-     *
-     * @param  \App\Event  $event
-     * @return void
-     */
-    public function restored(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Handle the event "force deleted" event.
-     *
-     * @param  \App\Event  $event
-     * @return void
-     */
-    public function forceDeleted(Event $event)
-    {
-        //
-    }
 }
