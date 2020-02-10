@@ -27,6 +27,10 @@ class EventsServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/database/migrations/' => database_path('migrations'),
             ], 'faithgen-events-migrations');
+
+            $this->publishes([
+                __DIR__ . '/storage/events/' => storage_path('app/public/events')
+            ], 'faithgen-events-storage');
         });
 
         $this->publishes([

@@ -5,10 +5,12 @@ namespace Innoflash\Events\Models;
 use FaithGen\SDK\Models\UuidModel;
 use FaithGen\SDK\Traits\Relationships\Belongs\BelongsToMinistryTrait;
 use FaithGen\SDK\Traits\Relationships\Morphs\CommentableTrait;
+use FaithGen\SDK\Traits\Relationships\Morphs\ImageableTrait;
+use FaithGen\SDK\Traits\StorageTrait;
 
 class Event extends UuidModel
 {
-    use BelongsToMinistryTrait, CommentableTrait;
+    use BelongsToMinistryTrait, CommentableTrait, ImageableTrait, StorageTrait;
 
     protected $casts = [
         'location' => 'array'
@@ -40,5 +42,20 @@ class Event extends UuidModel
     function getPublishedAttribute($val)
     {
         return (bool) $val;
+    }
+
+    function filesDir()
+    {
+        return 'events';
+    }
+
+    function getFileName()
+    {
+        return $this->image->name;
+    }
+
+    function getImageDimensions()
+    {
+        return [0, 50];
     }
 }
