@@ -16,11 +16,13 @@ class Event extends JsonResource
      */
     public function toArray($request)
     {
-        return array_merge(parent::toArray($request), [
+        return [
+            'name' => $this->name,
+            'location' => $this->location,
             'start' => Helper::getDates($this->start),
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
             'date' => Carbon::parse($this->start)->format('Y/m/d')
-        ]);
+        ];
     }
 }

@@ -15,6 +15,7 @@ use Innoflash\Events\Http\Requests\CommentRequest;
 use Intervention\Image\Exception\NotFoundException;
 use Innoflash\Events\Http\Requests\TogglePublishRequest;
 use Innoflash\Events\Http\Resources\Event as EventResource;
+use Innoflash\Events\Http\Resources\EventDetails;
 
 class EventController extends Controller
 {
@@ -67,7 +68,8 @@ class EventController extends Controller
     public function view(Event $event)
     {
         $this->authorize('event.view', $event);
-        return new EventResource($event);
+        EventDetails::withoutWrapping();
+        return new EventDetails($event);
     }
 
     public function comments(Request $request, Event $event)
