@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Innoflash\Events\Http\Controllers\EventController;
+use Innoflash\Events\Http\Controllers\GuestController;
 
 Route::prefix('events')
     ->middleware('source.site')
@@ -11,4 +12,6 @@ Route::prefix('events')
         Route::post('toggle-publish', [EventController::class, 'togglePublish']);
         Route::delete('', [EventController::class, 'destroy']);
         Route::delete('banner/{event}', [EventController::class, 'destroyBanner']);
+
+        Route::post('add-guest', [GuestController::class, 'create']);
     });

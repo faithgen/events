@@ -4,7 +4,6 @@ namespace Innoflash\Events;
 
 use FaithGen\SDK\Traits\ConfigTrait;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
 use Innoflash\Events\Models\Event;
 use Innoflash\Events\Models\Guest;
 use Innoflash\Events\Observers\EventObserver;

@@ -29,7 +29,7 @@ class Guest extends UuidModel
         return Str::title($val);
     }
 
-    function getFileNameFileName(string $path)
+    function getFileName(string $path)
     {
         return $this->image->name;
     }

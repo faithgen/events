@@ -12,6 +12,11 @@ class EventServiceProvider extends ServiceProvider
             \Innoflash\Events\Listeners\Saved\ProcessImage::class,
             \Innoflash\Events\Listeners\Saved\S3Upload::class,
         ],
+        \Innoflash\Events\Guest\Saved::class => [
+            \Innoflash\Events\Listeners\Guest\Saved\UploadImage::class,
+            \Innoflash\Events\Listeners\Guest\Saved\ProcessImage::class,
+            \Innoflash\Events\Listeners\Guest\Saved\S3Upload::class,
+        ],
     ];
     /**
      * Bootstrap services.

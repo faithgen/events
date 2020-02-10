@@ -32,7 +32,7 @@ class GuestService extends CRUDServices
      */
     function getUnsetFields()
     {
-        return ['guest_id'];
+        return ['guest_id', 'image'];
     }
 
     /**

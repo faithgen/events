@@ -2,8 +2,9 @@
 
 namespace Innoflash\Events\Observers;
 
-use FaithGen\SDK\Traits\FileTraits;
+use Innoflash\Events\Guest\Saved;
 use Innoflash\Events\Models\Guest;
+use FaithGen\SDK\Traits\FileTraits;
 
 class GuestObserver
 {
@@ -18,6 +19,7 @@ class GuestObserver
     }
     function created(Guest $guest)
     {
+        event(new Saved($guest, request('image')));
     }
 
     function updated(Guest $guest)
