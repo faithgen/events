@@ -82,4 +82,10 @@ class EventController extends Controller
             abort(400, 'This event is over, you can`t send anymore comments');
         return CommentHelper::createComment($this->eventsService->getEvent(), $request);
     }
+
+    public function destroyBanner(Event $event)
+    {
+        $this->authorize('event.view', $event);
+        return $this->eventsService->deleteBanner($event);
+    }
 }

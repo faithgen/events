@@ -2,11 +2,14 @@
 
 namespace Innoflash\Events\Services;
 
+use FaithGen\SDK\Traits\FileTraits;
 use Innoflash\Events\Models\Event;
 use InnoFlash\LaraStart\Services\CRUDServices;
 
 class EventsService extends CRUDServices
 {
+    use FileTraits;
+
     private $event;
     function __construct(Event $event)
     {
@@ -50,5 +53,15 @@ class EventsService extends CRUDServices
     function getParentRelationship()
     {
         return auth()->user()->events();
+    }
+
+    function deleteBanner($event)
+    {
+        if ($event->image()->exists()) {
+            $this->deleteFiles($event);
+            $event->image()->delete();
+            return $this->successResponse('Banner deleted');
+        } else return $this->successResponse('This event doesn`t have a banner already');
+        return abort(500, 'Error on deleting the banner');
     }
 }
