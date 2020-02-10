@@ -27,7 +27,8 @@ class EventDetails extends JsonResource
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
             'date' => Carbon::parse($this->start)->format('Y/m/d'),
-            'avatar' => $this->image()->exists() ? $this->getAvatar($this) : null
+            'avatar' => $this->image()->exists() ? $this->getAvatar($this) : null,
+            'guests' => Guest::collection($this->guests)
         ];
     }
 

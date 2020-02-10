@@ -13,6 +13,11 @@ class Guest extends UuidModel
 
     protected $guarded = ['id'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'event_id',
+    ];
 
     function event()
     {
