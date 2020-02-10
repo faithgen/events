@@ -34,6 +34,8 @@ class UpdateRequest extends FormRequest
             'start' => 'required|date_format:Y-m-d H:i',
             'end' => 'required|date_format:Y-m-d H:i',
             'published' => 'required|boolean',
+            'url' => 'url',
+            'video_url' => 'url',
         ];
     }
 
