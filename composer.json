@@ -13,6 +13,7 @@
     "prefer-stable": true,
     "require": {
         "faithgen/sdk": "^1.1.0",
+        "crazybooot/base64-validation": "^1.0",
         "illuminate/support": "^6.0",
         "illuminate/database": "^6.0",
         "illuminate/queue": "^6.0",
