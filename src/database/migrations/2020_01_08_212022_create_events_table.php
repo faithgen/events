@@ -22,6 +22,8 @@ class CreateEventsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->boolean('published')->default(false);
+            $table->string('url')->nullable();
+            $table->string('video_url')->nullable();
             $table->timestamps();
 
             $table->foreign('ministry_id')->references('id')->on('ministries')->onDelete('cascade');
