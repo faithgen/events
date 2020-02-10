@@ -6,7 +6,9 @@ use FaithGen\SDK\Traits\ConfigTrait;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use Innoflash\Events\Models\Event;
+use Innoflash\Events\Models\Guest;
 use Innoflash\Events\Observers\EventObserver;
+use Innoflash\Events\Observers\GuestObserver;
 use Innoflash\Events\Services\EventsService;
 use Innoflash\Events\Services\GuestService;
 
@@ -41,6 +43,7 @@ class EventsServiceProvider extends ServiceProvider
         ], 'faithgen-events-config');
 
         Event::observe(EventObserver::class);
+        Guest::observe(GuestObserver::class);
     }
 
     /**
