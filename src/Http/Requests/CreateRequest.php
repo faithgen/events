@@ -34,6 +34,7 @@ class CreateRequest extends FormRequest
             'published' => 'required|boolean',
             'url' => 'url',
             'video_url' => 'url',
+            'banner' => 'base64image'
         ];
     }
 

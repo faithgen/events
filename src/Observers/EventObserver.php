@@ -4,7 +4,7 @@ namespace Innoflash\Events\Observers;
 
 use FaithGen\SDK\Traits\FileTraits;
 use Innoflash\Events\Models\Event;
-
+use Innoflash\Events\Saved;
 
 class EventObserver
 {
@@ -17,7 +17,8 @@ class EventObserver
      */
     public function created(Event $event)
     {
-        //
+        if (request()->has('banner'))
+            event(new Saved($event, request('banner')));
     }
 
     /**
