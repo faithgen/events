@@ -2,14 +2,18 @@
 
 namespace Innoflash\Events\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Innoflash\Events\Models\Guest;
-use App\Http\Controllers\Controller;
 use Innoflash\Events\Services\GuestService;
 use Innoflash\Events\Http\Requests\Guest\CreateRequest;
+use InnoFlash\LaraStart\Traits\APIResponses;
 
 class GuestController extends Controller
 {
+    use AuthorizesRequests, APIResponses;
+
     protected $guestService;
 
     public function __construct(GuestService $guestService)

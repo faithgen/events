@@ -4,21 +4,24 @@ namespace Innoflash\Events\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Innoflash\Events\Models\Event;
-use App\Http\Controllers\Controller;
 use FaithGen\SDK\Helpers\CommentHelper;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Innoflash\Events\Services\EventsService;
 use Innoflash\Events\Http\Requests\CreateRequest;
 use Innoflash\Events\Http\Requests\DeleteRequest;
 use Innoflash\Events\Http\Requests\UpdateRequest;
+use Innoflash\Events\Http\Resources\EventDetails;
 use Innoflash\Events\Http\Requests\CommentRequest;
 use Intervention\Image\Exception\NotFoundException;
 use Innoflash\Events\Http\Requests\TogglePublishRequest;
 use Innoflash\Events\Http\Resources\Event as EventResource;
-use Innoflash\Events\Http\Resources\EventDetails;
 
 class EventController extends Controller
 {
+    use AuthorizesRequests;
+
     protected $eventsService;
 
     public function __construct(EventsService $eventsService)
