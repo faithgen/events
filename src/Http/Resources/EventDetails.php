@@ -21,6 +21,7 @@ class EventDetails extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'location' => $this->location,
+	    'published' => $this->published,
             'description' => $this->description,
             'url' => $this->url,
             'video_url' => $this->video_url,

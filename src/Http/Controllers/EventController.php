@@ -33,7 +33,7 @@ class EventController extends Controller
     {
         $params = $request->validated();
         if (!$request->has('location'))
-            if (!auth()->user()->profile->location) throw new NotFoundException('No location found for this event!', 404);
+            if (!auth()->user()->profile->location) throw new NotFoundException('No location found for this event, set one or set your profile location!', 404);
             else $params['location'] = auth()->user()->profile->location;
 
         return $this->eventsService->createFromParent($params, 'Event created successfully');

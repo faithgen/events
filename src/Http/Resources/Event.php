@@ -19,6 +19,7 @@ class Event extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+	    'published' => $this->published,
             'location' => $this->location,
             'start' => Helper::getDates($this->start),
             'end' => Helper::getDates($this->end),
