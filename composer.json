@@ -1,5 +1,5 @@
 {
-    "name": "innoflash/events",
+    "name": "faithgen/events",
     "description": "This package handles events for Faithgen",
     "type": "library",
     "license": "MIT",
