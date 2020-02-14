@@ -21,8 +21,6 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-events.php', 'faithgen-events');
-
         $this->registerRoutes(__DIR__ . '/routes/events.php', __DIR__ . '/routes/source.php');
 
         $this->setUpSourceFiles(function () {
@@ -70,6 +68,7 @@ class EventsServiceProvider extends ServiceProvider
         // $this->app->singleton('events', function () {
         //     return new EventsFacade();
         //  });
+        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-events.php', 'faithgen-events');
         $this->app->singleton(EventsService::class, EventsService::class);
         $this->app->singleton(GuestService::class, GuestService::class);
     }
