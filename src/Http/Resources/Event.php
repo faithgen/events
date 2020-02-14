@@ -19,11 +19,12 @@ class Event extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-	    'published' => $this->published,
+            'published' => $this->published,
             'location' => $this->location,
             'start' => Helper::getDates($this->start),
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
+            'avatar' => $this->avatar,
             'date' => Carbon::parse($this->start)->format('Y/m/d')
         ];
     }

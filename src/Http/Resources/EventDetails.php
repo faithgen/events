@@ -21,7 +21,7 @@ class EventDetails extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'location' => $this->location,
-	    'published' => $this->published,
+            'published' => $this->published,
             'description' => $this->description,
             'url' => $this->url,
             'video_url' => $this->video_url,
@@ -29,16 +29,8 @@ class EventDetails extends JsonResource
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
             'date' => Carbon::parse($this->start)->format('Y/m/d'),
-            'avatar' => $this->image()->exists() ? $this->getAvatar($this) : null,
+            'avatar' => $this->avatar,
             'guests' => Guest::collection($this->guests)
-        ];
-    }
-
-    function getAvatar($event)
-    {
-        return [
-            '_50' => SDK::getAsset('storage/events/50-50/' . $event->image->name),
-            'original' => SDK::getAsset('storage/events/original/' . $event->image->name),
         ];
     }
 }
