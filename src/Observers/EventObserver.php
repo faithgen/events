@@ -7,7 +7,6 @@ use Innoflash\Events\Jobs\Saved\ProcessImage;
 use Innoflash\Events\Jobs\Saved\S3Upload;
 use Innoflash\Events\Jobs\Saved\UploadImage;
 use Innoflash\Events\Models\Event;
-use Innoflash\Events\Saved;
 
 class EventObserver
 {
