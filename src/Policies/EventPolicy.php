@@ -29,7 +29,7 @@ class EventPolicy
      * @param  \  $ministry
      * @return mixed
      */
-    public static function create(Ministry $ministry)
+    public function create(Ministry $ministry)
     {
         if ($ministry->account->level === 'Free') return false;
         if ($ministry->events()->where(request()->only(['name', 'start', 'end']))->count())

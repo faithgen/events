@@ -4,6 +4,7 @@ namespace Innoflash\Events\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Auth\Access\AuthorizationException;
+use Innoflash\Events\Models\Event;
 
 class CreateRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class CreateRequest extends FormRequest
     public function authorize()
     {
         return true;
-        return $this->user()->can('event.create');
+        return $this->user()->can('event.create', Event::class);
     }
 
     /**
