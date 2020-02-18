@@ -44,7 +44,7 @@ class EventPolicy
      * @param  \Innoflash\Events\Models\Event  $event
      * @return mixed
      */
-    public static function update(Ministry $ministry, Event $event)
+    public function update(Ministry $ministry, Event $event)
     {
         return $ministry->id === $event->ministry_id;
     }

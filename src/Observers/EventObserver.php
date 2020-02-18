@@ -23,8 +23,7 @@ class EventObserver
             UploadImage::withChain([
                 new ProcessImage($event),
                 new S3Upload($event)
-            ])
-            ->dispatch($event, request('banner'));
+            ])->dispatch($event, request('banner'));
     }
 
     /**
@@ -40,8 +39,7 @@ class EventObserver
             UploadImage::withChain([
                 new ProcessImage($event),
                 new S3Upload($event)
-            ])
-            ->dispatch($event, request('banner'));
+            ])->dispatch($event, request('banner'));
         }
     }
 

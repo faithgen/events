@@ -16,7 +16,8 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(EventsService $eventsService)
     {
-        return $this->user()->can('event.update', $eventsService->getEvent());
+        return $eventsService->getEvent()
+            && $this->user()->can('update', $eventsService->getEvent());
     }
 
     /**
@@ -36,6 +37,7 @@ class UpdateRequest extends FormRequest
             'published' => 'required|boolean',
             'url' => 'url',
             'video_url' => 'url',
+            'banner' => 'base64image'
         ];
     }
 
