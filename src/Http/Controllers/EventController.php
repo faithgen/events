@@ -90,7 +90,7 @@ class EventController extends Controller
 
     public function destroyBanner(Event $event)
     {
-        $this->authorize('event.view', $event);
+        $this->authorize('view', $event);
         return $this->eventsService->deleteBanner($event);
     }
 }
