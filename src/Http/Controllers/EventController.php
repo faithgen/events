@@ -70,7 +70,7 @@ class EventController extends Controller
 
     public function view(Event $event)
     {
-        $this->authorize('event.view', $event);
+        $this->authorize('view', $event);
         EventDetails::withoutWrapping();
         return new EventDetails($event);
     }
