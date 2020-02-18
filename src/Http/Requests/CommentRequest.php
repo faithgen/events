@@ -17,7 +17,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize(EventsService $eventsService)
     {
-        if (auth()->user() instanceof Ministry) return $this->user()->can('event.view', $eventsService->getEvent());
+        if (auth()->user() instanceof Ministry) return $this->user()->can('view', $eventsService->getEvent());
         return true;
     }
 
