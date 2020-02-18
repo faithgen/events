@@ -77,7 +77,7 @@ class EventController extends Controller
 
     public function comments(Request $request, Event $event)
     {
-        $this->authorize('event.view', $event);
+        $this->authorize('view', $event);
         return CommentHelper::getComments($event, $request);
     }
 
