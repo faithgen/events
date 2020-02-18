@@ -3,6 +3,9 @@
 namespace Innoflash\Events\Observers;
 
 use FaithGen\SDK\Traits\FileTraits;
+use Innoflash\Events\Jobs\Saved\ProcessImage;
+use Innoflash\Events\Jobs\Saved\S3Upload;
+use Innoflash\Events\Jobs\Saved\UploadImage;
 use Innoflash\Events\Models\Event;
 use Innoflash\Events\Saved;
 
@@ -18,7 +21,11 @@ class EventObserver
     public function created(Event $event)
     {
         if (request()->has('banner'))
-            event(new Saved($event, request('banner')));
+            UploadImage::withChain([
+                new ProcessImage($event),
+                new S3Upload($event)
+            ])
+            ->dispatch($event, request('banner'));
     }
 
     /**
@@ -31,7 +38,11 @@ class EventObserver
     {
         if (request()->has('banner')) {
             $this->deleted($event);
-            event(new Saved($event, request('banner')));
+            UploadImage::withChain([
+                new ProcessImage($event),
+                new S3Upload($event)
+            ])
+            ->dispatch($event, request('banner'));
         }
     }
 
