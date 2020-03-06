@@ -50,6 +50,9 @@ class EventController extends Controller
             ->published()
             ->orderBy('start', 'asc')
             ->get();
+
+	EventResource::wrap('events');
+
         return EventResource::collection($events);
     }
 
