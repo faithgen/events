@@ -24,10 +24,10 @@ class EventsServiceProvider extends ServiceProvider
         $this->registerRoutes(__DIR__ . '/routes/events.php', __DIR__ . '/routes/source.php');
 
         $this->setUpSourceFiles(function () {
-            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
             $this->publishes([
-                __DIR__ . '/database/migrations/' => database_path('migrations'),
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
             ], 'faithgen-events-migrations');
 
             $this->publishes([
@@ -64,12 +64,9 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register facade
-        // $this->app->singleton('events', function () {
-        //     return new EventsFacade();
-        //  });
         $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-events.php', 'faithgen-events');
-        $this->app->singleton(EventsService::class, EventsService::class);
-        $this->app->singleton(GuestService::class, GuestService::class);
+
+        $this->app->singleton(EventsService::class);
+        $this->app->singleton(GuestService::class);
     }
 }
