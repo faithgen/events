@@ -21,7 +21,7 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerRoutes(__DIR__ . '/routes/events.php', __DIR__ . '/routes/source.php');
+        $this->registerRoutes(__DIR__ . '/../routes/events.php', __DIR__ . '/../routes/source.php');
 
         $this->setUpSourceFiles(function () {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
