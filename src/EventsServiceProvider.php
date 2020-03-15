@@ -31,7 +31,7 @@ class EventsServiceProvider extends ServiceProvider
             ], 'faithgen-events-migrations');
 
             $this->publishes([
-                __DIR__ . '/storage/events/' => storage_path('app/public/events')
+                __DIR__ . '/../storage/events/' => storage_path('app/public/events')
             ], 'faithgen-events-storage');
         });
 
