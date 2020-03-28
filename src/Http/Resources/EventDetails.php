@@ -3,9 +3,8 @@
 namespace Innoflash\Events\Http\Resources;
 
 use Carbon\Carbon;
-use FaithGen\SDK\SDK;
-use InnoFlash\LaraStart\Http\Helper;
 use Illuminate\Http\Resources\Json\JsonResource;
+use InnoFlash\LaraStart\Helper;
 
 class EventDetails extends JsonResource
 {

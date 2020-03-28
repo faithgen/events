@@ -3,7 +3,7 @@
 namespace Innoflash\Events\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use InnoFlash\LaraStart\Http\Helper;
+use InnoFlash\LaraStart\Helper;
 use Carbon\Carbon;
 
 class Event extends JsonResource
