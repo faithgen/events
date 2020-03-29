@@ -52,7 +52,6 @@ class EventsServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => config('faithgen-events.prefix'),
-            'namespace' => "FaithGen\Events\Http\Controllers",
             'middleware' => config('faithgen-events.middlewares'),
         ];
     }

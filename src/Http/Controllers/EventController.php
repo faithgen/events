@@ -29,6 +29,12 @@ class EventController extends Controller
         $this->eventsService = $eventsService;
     }
 
+    /**
+     * Creates and event.
+     *
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(CreateRequest $request)
     {
         $params = $request->validated();
@@ -39,6 +45,12 @@ class EventController extends Controller
         return $this->eventsService->createFromParent($params, 'Event created successfully');
     }
 
+    /**
+     * Fetches the events for the given date.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index(Request $request)
     {
         if ($request->has('date')) $date = Carbon::parse($request->date);
@@ -51,26 +63,51 @@ class EventController extends Controller
             ->orderBy('start', 'asc')
             ->get();
 
-	EventResource::wrap('events');
+        EventResource::wrap('events');
 
         return EventResource::collection($events);
     }
 
+    /**
+     * Updates an event.
+     *
+     * @param UpdateRequest $request
+     * @return \Illuminate\Http\JsonResponse|mixed
+     */
     public function update(UpdateRequest $request)
     {
         return $this->eventsService->update($request->validated(), 'Event updated successfully!');
     }
 
+    /**
+     * Toggles ublish status.
+     *
+     * @param TogglePublishRequest $request
+     * @return \Illuminate\Http\JsonResponse|mixed
+     */
     public function togglePublish(TogglePublishRequest $request)
     {
         return $this->eventsService->update($request->validated(), 'Event publish status changed successfully!');
     }
 
+    /**
+     * Deletes event.
+     *
+     * @param DeleteRequest $request
+     * @return mixed
+     */
     public function destroy(DeleteRequest $request)
     {
         return $this->eventsService->destroy('Event deleted successfully!');
     }
 
+    /**
+     * Views the singular event.
+     *
+     * @param Event $event
+     * @return EventDetails
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function view(Event $event)
     {
         $this->authorize('view', $event);
@@ -78,12 +115,26 @@ class EventController extends Controller
         return new EventDetails($event);
     }
 
+    /**
+     * Gets the comments for the event.
+     *
+     * @param Request $request
+     * @param Event $event
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function comments(Request $request, Event $event)
     {
         $this->authorize('view', $event);
         return CommentHelper::getComments($event, $request);
     }
 
+    /**
+     * Sends a comment to an event.
+     *
+     * @param CommentRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function comment(CommentRequest $request)
     {
         if (Carbon::parse($this->eventsService->getEvent()->end)->isPast())
@@ -91,6 +142,12 @@ class EventController extends Controller
         return CommentHelper::createComment($this->eventsService->getEvent(), $request);
     }
 
+    /**
+     * Deletes the banner for an event.
+     *
+     * @param Event $event
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroyBanner(Event $event)
     {
         $this->authorize('view', $event);

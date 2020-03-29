@@ -21,11 +21,24 @@ class GuestController extends Controller
         $this->guestService = $guestService;
     }
 
+    /**
+     * Adds a guest to an event.
+     *
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     function create(CreateRequest $request)
     {
         return $this->guestService->create($request->validated(), 'Guest added to the event');
     }
 
+    /**
+     * Removes a guest from an event.
+     *
+     * @param Guest $guest
+     * @return mixed
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy(Guest $guest)
     {
         $this->authorize('event.delete', $guest->event);
