@@ -12,11 +12,12 @@ class CreateRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      *
+     * @param EventsService $eventsService
      * @return bool
      */
     public function authorize(EventsService $eventsService)
     {
-        return $eventsService->getEvent() && $this->user()->can('event.view', $eventsService->getEvent());
+        return $eventsService->getEvent() && $this->user()->can('view', $eventsService->getEvent());
     }
 
     /**

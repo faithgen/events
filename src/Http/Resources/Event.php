@@ -22,6 +22,7 @@ class Event extends JsonResource
             'name' => $this->name,
             'published' => $this->published,
             'location' => $this->location,
+            'description' => $this->description,
             'start' => Helper::getDates($this->start),
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
