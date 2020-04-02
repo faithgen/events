@@ -1,6 +1,6 @@
 <?php
 
-namespace Innoflash\Events\Guest;
+namespace Innoflash\Events\Events\Guest;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
