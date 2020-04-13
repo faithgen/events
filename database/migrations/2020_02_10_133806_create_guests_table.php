@@ -13,7 +13,7 @@ class CreateGuestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('fg_guests', function (Blueprint $table) {
             $table->string('id')->index()->primary();
             $table->string('event_id', 150)->index();
             $table->string('title');
@@ -31,6 +31,6 @@ class CreateGuestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('fg_guests');
     }
 }

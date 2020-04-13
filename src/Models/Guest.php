@@ -11,6 +11,7 @@ class Guest extends UuidModel
 {
     use ImageableTrait, StorageTrait;
 
+    protected $table = 'fg_guests';
     protected $guarded = ['id'];
 
     protected $hidden = [
