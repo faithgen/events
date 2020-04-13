@@ -2,9 +2,8 @@
 
 namespace Innoflash\Events\Listeners\Guest\Saved;
 
-use Innoflash\Events\Guest\Saved;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Innoflash\Events\Guest\Saved;
 
 class S3Upload implements ShouldQueue
 {

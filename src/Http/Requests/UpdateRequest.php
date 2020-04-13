@@ -3,9 +3,9 @@
 namespace Innoflash\Events\Http\Requests;
 
 use FaithGen\SDK\Helpers\Helper;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class UpdateRequest extends FormRequest
 {
@@ -37,11 +37,11 @@ class UpdateRequest extends FormRequest
             'published' => 'required|boolean',
             'url' => 'url',
             'video_url' => 'url',
-            'banner' => 'base64image'
+            'banner' => 'base64image',
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You are not allowed to update this event');
     }

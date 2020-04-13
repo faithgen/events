@@ -11,6 +11,7 @@ use Innoflash\Events\Models\Event;
 class EventObserver
 {
     use FileTraits;
+
     /**
      * Handle the event "created" event.
      *
@@ -19,11 +20,12 @@ class EventObserver
      */
     public function created(Event $event)
     {
-        if (request()->has('banner'))
+        if (request()->has('banner')) {
             UploadImage::withChain([
                 new ProcessImage($event),
-                new S3Upload($event)
+                new S3Upload($event),
             ])->dispatch($event, request('banner'));
+        }
     }
 
     /**
@@ -38,7 +40,7 @@ class EventObserver
             $this->deleted($event);
             UploadImage::withChain([
                 new ProcessImage($event),
-                new S3Upload($event)
+                new S3Upload($event),
             ])->dispatch($event, request('banner'));
         }
     }

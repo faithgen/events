@@ -2,27 +2,28 @@
 
 namespace Innoflash\Events\Observers;
 
+use FaithGen\SDK\Traits\FileTraits;
 use Innoflash\Events\Guest\Saved;
 use Innoflash\Events\Models\Guest;
-use FaithGen\SDK\Traits\FileTraits;
 
 class GuestObserver
 {
     use FileTraits;
 
-    function deleted(Guest $guest)
+    public function deleted(Guest $guest)
     {
         if ($guest->image()->exists()) {
             $this->deleteFiles($guest);
             $guest->image()->delete();
         }
     }
-    function created(Guest $guest)
+
+    public function created(Guest $guest)
     {
         event(new Saved($guest, request('image')));
     }
 
-    function updated(Guest $guest)
+    public function updated(Guest $guest)
     {
     }
 }

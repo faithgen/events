@@ -2,11 +2,8 @@
 
 namespace Innoflash\Events\Events\Guest;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Innoflash\Events\Models\Guest;
@@ -30,12 +27,12 @@ class Saved
         $this->image = $image;
     }
 
-    function getGuest(): Guest
+    public function getGuest(): Guest
     {
         return $this->guest;
     }
 
-    function getImage(): string
+    public function getImage(): string
     {
         return $this->image;
     }

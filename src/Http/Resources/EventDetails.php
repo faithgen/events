@@ -30,7 +30,7 @@ class EventDetails extends JsonResource
             'is_past' => Carbon::parse($this->end)->isPast(),
             'date' => Carbon::parse($this->start)->format('Y/m/d'),
             'avatar' => ImageHelper::getImage('events', $this->image, config('faithgen-sdk.ministries-server')),
-            'guests' => Guest::collection($this->guests)
+            'guests' => Guest::collection($this->guests),
         ];
     }
 }

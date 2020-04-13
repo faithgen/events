@@ -2,15 +2,16 @@
 
 namespace Innoflash\Events\Providers;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Innoflash\Events\Models\Event;
 use Innoflash\Events\Policies\EventPolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        Event::class => EventPolicy::class
+        Event::class => EventPolicy::class,
     ];
+
     /**
      * Bootstrap services.
      *

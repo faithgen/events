@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Innoflash\Events\Traits;
-
 
 use Innoflash\Events\Models\Event;
 

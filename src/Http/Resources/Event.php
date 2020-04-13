@@ -2,10 +2,10 @@
 
 namespace Innoflash\Events\Http\Resources;
 
+use Carbon\Carbon;
 use FaithGen\SDK\Helpers\ImageHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use InnoFlash\LaraStart\Helper;
-use Carbon\Carbon;
 
 class Event extends JsonResource
 {
@@ -27,7 +27,7 @@ class Event extends JsonResource
             'end' => Helper::getDates($this->end),
             'is_past' => Carbon::parse($this->end)->isPast(),
             'avatar' => ImageHelper::getImage('events', $this->image, config('faithgen-sdk.ministries-server')),
-            'date' => Carbon::parse($this->start)->format('Y/m/d')
+            'date' => Carbon::parse($this->start)->format('Y/m/d'),
         ];
     }
 }
