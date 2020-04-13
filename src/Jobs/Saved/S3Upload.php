@@ -3,11 +3,11 @@
 namespace Innoflash\Events\Jobs\Saved;
 
 use Illuminate\Bus\Queueable;
-use Innoflash\Events\Models\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Innoflash\Events\Models\Event;
 
 class S3Upload implements ShouldQueue
 {

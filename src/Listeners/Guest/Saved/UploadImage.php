@@ -2,10 +2,9 @@
 
 namespace Innoflash\Events\Listeners\Guest\Saved;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Innoflash\Events\Guest\Saved;
 use Intervention\Image\ImageManager;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UploadImage implements ShouldQueue
 {
@@ -29,13 +28,13 @@ class UploadImage implements ShouldQueue
      */
     public function handle(Saved $event)
     {
-        $fileName = 'guest-' . str_shuffle($event->getGuest()->id . time() . time()) . '.png';
-        $ogSave = storage_path('app/public/events/original/') . $fileName;
+        $fileName = 'guest-'.str_shuffle($event->getGuest()->id.time().time()).'.png';
+        $ogSave = storage_path('app/public/events/original/').$fileName;
         $this->imageManager->make($event->getImage())->save($ogSave);
         $event->getGuest()->image()->updateOrcreate([
-            'imageable_id' => $event->getGuest()->id
+            'imageable_id' => $event->getGuest()->id,
         ], [
-            'name' => $fileName
+            'name' => $fileName,
         ]);
     }
 }

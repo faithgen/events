@@ -3,9 +3,9 @@
 namespace Innoflash\Events\Http\Requests\Guest;
 
 use FaithGen\SDK\Helpers\Helper;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class CreateRequest extends FormRequest
 {
@@ -31,11 +31,11 @@ class CreateRequest extends FormRequest
             'title' => 'required|string|min:2|max:15',
             'name' => 'required|string',
             'event_id' => Helper::$idValidation,
-            'image' => 'required|base64image'
+            'image' => 'required|base64image',
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You are not allowed to transact on this event');
     }

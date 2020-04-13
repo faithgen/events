@@ -3,9 +3,9 @@
 namespace Innoflash\Events\Http\Requests;
 
 use FaithGen\SDK\Helpers\Helper;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class DeleteRequest extends FormRequest
 {
@@ -16,7 +16,7 @@ class DeleteRequest extends FormRequest
      */
     public function authorize(EventsService $eventsService)
     {
-        return $eventsService->getEvent() 
+        return $eventsService->getEvent()
             && $this->user()->can('delete', $eventsService->getEvent());
     }
 
@@ -28,11 +28,11 @@ class DeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'event_id' => Helper::$idValidation
+            'event_id' => Helper::$idValidation,
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You are not allowed to delete this event');
     }

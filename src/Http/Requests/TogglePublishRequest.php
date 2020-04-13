@@ -3,9 +3,9 @@
 namespace Innoflash\Events\Http\Requests;
 
 use FaithGen\SDK\Helpers\Helper;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class TogglePublishRequest extends FormRequest
 {
@@ -29,11 +29,11 @@ class TogglePublishRequest extends FormRequest
     {
         return [
             'event_id' => Helper::$idValidation,
-            'published' => 'required|boolean'
+            'published' => 'required|boolean',
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You are not allowed to update this event');
     }

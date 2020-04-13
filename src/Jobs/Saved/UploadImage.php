@@ -1,12 +1,13 @@
 <?php
+
 namespace Innoflash\Events\Jobs\Saved;
 
 use Illuminate\Bus\Queueable;
-use Innoflash\Events\Models\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Innoflash\Events\Models\Event;
 use Intervention\Image\ImageManager;
 
 class UploadImage implements ShouldQueue
@@ -36,13 +37,13 @@ class UploadImage implements ShouldQueue
      */
     public function handle(ImageManager $imageManager)
     {
-        $fileName = str_shuffle($this->event->id . time() . time()) . '.png';
-        $ogSave = storage_path('app/public/events/original/') . $fileName;
+        $fileName = str_shuffle($this->event->id.time().time()).'.png';
+        $ogSave = storage_path('app/public/events/original/').$fileName;
         $imageManager->make($this->image)->save($ogSave);
         $this->event->image()->updateOrcreate([
-            'imageable_id' => $this->event->id
+            'imageable_id' => $this->event->id,
         ], [
-            'name' => $fileName
+            'name' => $fileName,
         ]);
     }
 }

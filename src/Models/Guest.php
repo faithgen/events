@@ -2,10 +2,10 @@
 
 namespace Innoflash\Events\Models;
 
-use Illuminate\Support\Str;
 use FaithGen\SDK\Models\UuidModel;
 use FaithGen\SDK\Traits\Relationships\Morphs\ImageableTrait;
 use FaithGen\SDK\Traits\StorageTrait;
+use Illuminate\Support\Str;
 
 class Guest extends UuidModel
 {
@@ -19,35 +19,35 @@ class Guest extends UuidModel
         'event_id',
     ];
 
-    function event()
+    public function event()
     {
         return $this->belongsTo(Event::class);
     }
 
-    function getTitleAttribute($val)
+    public function getTitleAttribute($val)
     {
         return Str::title($val);
     }
 
-    function getNameAttribute($val)
+    public function getNameAttribute($val)
     {
         return Str::title($val);
     }
 
-    function getFileName()
+    public function getFileName()
     {
         return $this->image->name;
     }
 
-    function filesDir()
+    public function filesDir()
     {
         return 'events';
     }
 
-    function getImageDimensions()
+    public function getImageDimensions()
     {
         return [
-            0, 50
+            0, 50,
         ];
     }
 }

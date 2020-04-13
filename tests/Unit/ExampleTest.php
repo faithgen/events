@@ -3,7 +3,6 @@
 namespace Innoflash\Events\Tests\Unit;
 
 use Innoflash\Events\Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {

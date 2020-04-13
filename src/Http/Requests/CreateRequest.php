@@ -2,8 +2,8 @@
 
 namespace Innoflash\Events\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Models\Event;
 
 class CreateRequest extends FormRequest
@@ -16,6 +16,7 @@ class CreateRequest extends FormRequest
     public function authorize()
     {
         return true;
+
         return $this->user()->can('create', Event::class);
     }
 
@@ -35,13 +36,14 @@ class CreateRequest extends FormRequest
             'published' => 'required|boolean',
             'url' => 'url',
             'video_url' => 'url',
-            'banner' => 'base64image'
+            'banner' => 'base64image',
         ];
     }
 
     protected function failedAuthorization()
     {
-        if (strcmp(auth()->user()->account->level, 'Free') === 0)
+        if (strcmp(auth()->user()->account->level, 'Free') === 0) {
             throw new AuthorizationException('You need to upgrade to able to create events');
+        }
     }
 }

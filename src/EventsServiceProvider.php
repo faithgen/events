@@ -14,6 +14,7 @@ use Innoflash\Events\Services\GuestService;
 class EventsServiceProvider extends ServiceProvider
 {
     use ConfigTrait;
+
     /**
      * Bootstrap any application services.
      *
@@ -21,22 +22,22 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerRoutes(__DIR__ . '/../routes/events.php', __DIR__ . '/../routes/source.php');
+        $this->registerRoutes(__DIR__.'/../routes/events.php', __DIR__.'/../routes/source.php');
 
         $this->setUpSourceFiles(function () {
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+                __DIR__.'/../database/migrations/' => database_path('migrations'),
             ], 'faithgen-events-migrations');
 
             $this->publishes([
-                __DIR__ . '/../storage/events/' => storage_path('app/public/events')
+                __DIR__.'/../storage/events/' => storage_path('app/public/events'),
             ], 'faithgen-events-storage');
         });
 
         $this->publishes([
-            __DIR__ . '/../config/faithgen-events.php' => config_path('faithgen-events.php'),
+            __DIR__.'/../config/faithgen-events.php' => config_path('faithgen-events.php'),
         ], 'faithgen-events-config');
 
         Event::observe(EventObserver::class);
@@ -63,7 +64,7 @@ class EventsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-events.php', 'faithgen-events');
+        $this->mergeConfigFrom(__DIR__.'/../config/faithgen-events.php', 'faithgen-events');
 
         $this->app->singleton(EventsService::class);
         $this->app->singleton(GuestService::class);

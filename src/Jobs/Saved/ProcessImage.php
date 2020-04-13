@@ -3,11 +3,11 @@
 namespace Innoflash\Events\Jobs\Saved;
 
 use Illuminate\Bus\Queueable;
-use Innoflash\Events\Models\Event;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Innoflash\Events\Models\Event;
 use Intervention\Image\ImageManager;
 
 class ProcessImage implements ShouldQueue
@@ -35,8 +35,8 @@ class ProcessImage implements ShouldQueue
     public function handle(ImageManager $imageManager)
     {
         if ($this->event->image()->exists()) {
-            $ogImage = storage_path('app/public/events/original/') . $this->event->image->name;
-            $thumb100 = storage_path('app/public/events/50-50/') . $this->event->image->name;
+            $ogImage = storage_path('app/public/events/original/').$this->event->image->name;
+            $thumb100 = storage_path('app/public/events/50-50/').$this->event->image->name;
 
             $imageManager->make($ogImage)->fit(50, 50, function ($constraint) {
                 $constraint->upsize();

@@ -18,6 +18,7 @@ class EventServiceProvider extends ServiceProvider
             \Innoflash\Events\Listeners\Guest\Saved\S3Upload::class,
         ],
     ];
+
     /**
      * Bootstrap services.
      *

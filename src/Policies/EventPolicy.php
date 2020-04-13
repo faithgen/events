@@ -3,9 +3,8 @@
 namespace Innoflash\Events\Policies;
 
 use App\Models\Ministry;
-use Illuminate\Auth\Access\AuthorizationException;
-use Innoflash\Events\Models\Event;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Innoflash\Events\Models\Event;
 
 class EventPolicy
 {
@@ -31,10 +30,14 @@ class EventPolicy
      */
     public function create(Ministry $ministry)
     {
-        if ($ministry->account->level === 'Free') return false;
-        if ($ministry->events()->where(request()->only(['name', 'start', 'end']))->count())
+        if ($ministry->account->level === 'Free') {
+            return false;
+        }
+        if ($ministry->events()->where(request()->only(['name', 'start', 'end']))->count()) {
             abort(403, 'You already registered this event');
-        else return true;
+        } else {
+            return true;
+        }
     }
 
     /**

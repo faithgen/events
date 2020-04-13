@@ -4,9 +4,9 @@ namespace Innoflash\Events\Http\Requests;
 
 use FaithGen\SDK\Helpers\Helper;
 use FaithGen\SDK\Models\Ministry;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class CommentRequest extends FormRequest
 {
@@ -17,7 +17,10 @@ class CommentRequest extends FormRequest
      */
     public function authorize(EventsService $eventsService)
     {
-        if (auth()->user() instanceof Ministry) return $this->user()->can('view', $eventsService->getEvent());
+        if (auth()->user() instanceof Ministry) {
+            return $this->user()->can('view', $eventsService->getEvent());
+        }
+
         return true;
     }
 
@@ -30,11 +33,11 @@ class CommentRequest extends FormRequest
     {
         return [
             'event_id' => Helper::$idValidation,
-            'comment' => 'required'
+            'comment' => 'required',
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You do not have access to this event');
     }
