@@ -13,6 +13,7 @@ class Event extends UuidModel
 {
     use BelongsToMinistryTrait, CommentableTrait, ImageableTrait, StorageTrait;
 
+    protected $table = 'fg_events';
     protected $casts = [
         'location' => 'array',
     ];
