@@ -1,8 +1,9 @@
-# events
+# FaithGen Events
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Travis](https://img.shields.io/travis/innoflash/events.svg?style=flat-square)]()
-[![Total Downloads](https://img.shields.io/packagist/dt/innoflash/events.svg?style=flat-square)](https://packagist.org/packages/innoflash/events)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/faithgen/events.svg?style=flat-square)](https://packagist.org/packages/faithgen/events)
+[![Build Status](https://img.shields.io/travis/faithgen/events/master.svg?style=flat-square)](https://travis-ci.org/faithgen/events)
+[![Quality Score](https://img.shields.io/scrutinizer/g/faithgen/events.svg?style=flat-square)](https://scrutinizer-ci.com/g/faithgen/events)
+[![Total Downloads](https://img.shields.io/packagist/dt/faithgen/events.svg?style=flat-square)](https://packagist.org/packages/faithgen/events)
 
 ## Install
 `composer require innoflash/events`
