@@ -2,6 +2,7 @@
 
 namespace Innoflash\Events\Jobs\Saved;
 
+use FaithGen\SDK\Traits\UploadsImages;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,17 +13,22 @@ use Intervention\Image\ImageManager;
 
 class UploadImage implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable,
+        InteractsWithQueue,
+        Queueable,
+        SerializesModels,
+        UploadsImages;
 
-    public $deleteWhenMissingModels = true;
-    protected $event;
+    public bool $deleteWhenMissingModels = true;
+    protected Event $event;
 
-    protected $image;
+    protected string $image;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Event $event
+     * @param string $image
      */
     public function __construct(Event $event, string $image)
     {
@@ -33,17 +39,12 @@ class UploadImage implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param ImageManager $imageManager
+     *
      * @return void
      */
     public function handle(ImageManager $imageManager)
     {
-        $fileName = str_shuffle($this->event->id.time().time()).'.png';
-        $ogSave = storage_path('app/public/events/original/').$fileName;
-        $imageManager->make($this->image)->save($ogSave);
-        $this->event->image()->updateOrcreate([
-            'imageable_id' => $this->event->id,
-        ], [
-            'name' => $fileName,
-        ]);
+        $this->uploadImages($this->event, [$this->image], $imageManager);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Innoflash\Events\Jobs\Saved;
 
+use FaithGen\SDK\Traits\ProcessesImages;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,15 +13,19 @@ use Intervention\Image\ImageManager;
 
 class ProcessImage implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable,
+        InteractsWithQueue,
+        Queueable,
+        SerializesModels,
+        ProcessesImages;
 
-    public $deleteWhenMissingModels = true;
-    protected $event;
+    public bool $deleteWhenMissingModels = true;
+    protected Event $event;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Event $event
      */
     public function __construct(Event $event)
     {
@@ -30,18 +35,12 @@ class ProcessImage implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param ImageManager $imageManager
+     *
      * @return void
      */
     public function handle(ImageManager $imageManager)
     {
-        if ($this->event->image()->exists()) {
-            $ogImage = storage_path('app/public/events/original/').$this->event->image->name;
-            $thumb100 = storage_path('app/public/events/50-50/').$this->event->image->name;
-
-            $imageManager->make($ogImage)->fit(50, 50, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-            }, 'center')->save($thumb100);
-        }
+        $this->processImage($imageManager, $this->event);
     }
 }
