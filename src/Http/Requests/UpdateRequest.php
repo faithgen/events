@@ -2,7 +2,6 @@
 
 namespace Innoflash\Events\Http\Requests;
 
-use FaithGen\SDK\Helpers\Helper;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;
@@ -28,16 +27,15 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'event_id' => Helper::$idValidation,
-            'name' => 'required|string',
+            'name'        => 'required|string',
             'description' => 'required|string',
-            'location' => 'required|array',
-            'start' => 'required|date_format:Y-m-d H:i',
-            'end' => 'required|date_format:Y-m-d H:i',
-            'published' => 'required|boolean',
-            'url' => 'url',
-            'video_url' => 'url',
-            'banner' => 'base64image',
+            'location'    => 'required|array',
+            'start'       => 'required|date_format:Y-m-d H:i',
+            'end'         => 'required|date_format:Y-m-d H:i',
+            'published'   => 'required|boolean',
+            'url'         => 'url',
+            'video_url'   => 'url',
+            'banner'      => 'base64image',
         ];
     }
 

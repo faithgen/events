@@ -44,7 +44,7 @@ class EventsService extends CRUDServices
      */
     public function getUnsetFields(): array
     {
-        return ['event_id'];
+        return ['event_id', 'banner'];
     }
 
     /**
