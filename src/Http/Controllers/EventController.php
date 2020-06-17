@@ -32,7 +32,8 @@ class EventController extends Controller
     /**
      * Creates and event.
      *
-     * @param CreateRequest $request
+     * @param  CreateRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(CreateRequest $request)
@@ -40,7 +41,8 @@ class EventController extends Controller
         $params = $request->validated();
         if (! $request->has('location')) {
             if (! auth()->user()->profile->location) {
-                throw new NotFoundException('No location found for this event, set one or set your profile location!', 404);
+                throw new NotFoundException('No location found for this event, set one or set your profile location!',
+                    404);
             } else {
                 $params['location'] = auth()->user()->profile->location;
             }
@@ -52,7 +54,8 @@ class EventController extends Controller
     /**
      * Fetches the events for the given date.
      *
-     * @param Request $request
+     * @param  Request  $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request)
@@ -78,7 +81,8 @@ class EventController extends Controller
     /**
      * Updates an event.
      *
-     * @param UpdateRequest $request
+     * @param  UpdateRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function update(UpdateRequest $request)
@@ -89,7 +93,8 @@ class EventController extends Controller
     /**
      * Toggles ublish status.
      *
-     * @param TogglePublishRequest $request
+     * @param  TogglePublishRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function togglePublish(TogglePublishRequest $request)
@@ -100,7 +105,8 @@ class EventController extends Controller
     /**
      * Deletes event.
      *
-     * @param DeleteRequest $request
+     * @param  DeleteRequest  $request
+     *
      * @return mixed
      */
     public function destroy(DeleteRequest $request)
@@ -111,7 +117,8 @@ class EventController extends Controller
     /**
      * Views the singular event.
      *
-     * @param Event $event
+     * @param  Event  $event
+     *
      * @return EventDetails
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -126,8 +133,9 @@ class EventController extends Controller
     /**
      * Gets the comments for the event.
      *
-     * @param Request $request
-     * @param Event $event
+     * @param  Request  $request
+     * @param  Event  $event
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -141,7 +149,8 @@ class EventController extends Controller
     /**
      * Sends a comment to an event.
      *
-     * @param CommentRequest $request
+     * @param  CommentRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function comment(CommentRequest $request)
@@ -156,7 +165,8 @@ class EventController extends Controller
     /**
      * Deletes the banner for an event.
      *
-     * @param Event $event
+     * @param  Event  $event
+     *
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroyBanner(Event $event)

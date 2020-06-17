@@ -12,6 +12,8 @@ class TogglePublishRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      *
+     * @param  \Innoflash\Events\Services\EventsService  $eventsService
+     *
      * @return bool
      */
     public function authorize(EventsService $eventsService)
@@ -28,7 +30,6 @@ class TogglePublishRequest extends FormRequest
     public function rules()
     {
         return [
-            'event_id' => Helper::$idValidation,
             'published' => 'required|boolean',
         ];
     }

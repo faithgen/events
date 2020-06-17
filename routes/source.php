@@ -9,7 +9,7 @@ Route::prefix('events')
     ->group(function () {
         Route::post('', [EventController::class, 'create']);
         Route::post('update/{event}', [EventController::class, 'update']);
-        Route::post('toggle-publish', [EventController::class, 'togglePublish']);
+        Route::put('toggle-publish/{event}', [EventController::class, 'togglePublish']);
         Route::delete('', [EventController::class, 'destroy']);
         Route::delete('banner/{event}', [EventController::class, 'destroyBanner']);
 
