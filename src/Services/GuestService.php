@@ -8,19 +8,25 @@ use InnoFlash\LaraStart\Services\CRUDServices;
 
 class GuestService extends CRUDServices
 {
-    private $guest;
+    protected Guest $guest;
 
-    public function __construct(Guest $guest)
+    public function __construct()
     {
+        $this->guest = app(Guest::class);
+
         if (request()->has('guest_id')) {
             $this->guest = Guest::findOrFail(request('guest_id'));
-        } else {
-            $this->guest = $guest;
+        }
+
+        if (request()->route()->hasParameter('guest')) {
+            $this->guest = $this->guest->resolveRouteBinding(request()->route('guest'));
         }
     }
 
     /**
-     * Retrives an instance of guest.
+     * Retrieves an instance of guest.
+     *
+     * @return \Innoflash\Events\Models\Guest
      */
     public function getGuest(): Guest
     {
@@ -29,21 +35,14 @@ class GuestService extends CRUDServices
 
     /**
      * Makes a list of fields that you do not want to be sent
-     * to the create or update methods
-     * Its mainly the fields that you do not have in the guests table.
+     * to the create or update methods.
+     * Its mainly the fields that you do not have in the messages table.
+     *
+     * @return array
      */
-    public function getUnsetFields()
+    public function getUnsetFields(): array
     {
-        return ['guest_id', 'image'];
-    }
-
-    /**
-     * This returns the model found in the constructor
-     * or an instance of the class if no guest is found.
-     */
-    public function getModel()
-    {
-        return $this->getGuest();
+        return ['guest_id'];
     }
 
     /**

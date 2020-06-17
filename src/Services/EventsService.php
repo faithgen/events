@@ -10,19 +10,25 @@ class EventsService extends CRUDServices
 {
     use FileTraits;
 
-    private $event;
+    protected Event $event;
 
-    public function __construct(Event $event)
+    public function __construct()
     {
+        $this->event = app(Event::class);
+
         if (request()->has('event_id')) {
             $this->event = Event::findOrFail(request('event_id'));
-        } else {
-            $this->event = $event;
+        }
+
+        if (request()->route()->hasParameter('event')) {
+            $this->event = $this->event->resolveRouteBinding(request()->route('event'));
         }
     }
 
     /**
-     * Retrives an instance of event.
+     * Retrieves an instance of event.
+     *
+     * @return \Innoflash\Events\Models\Event
      */
     public function getEvent(): Event
     {
@@ -31,21 +37,14 @@ class EventsService extends CRUDServices
 
     /**
      * Makes a list of fields that you do not want to be sent
-     * to the create or update methods
-     * Its mainly the fields that you do not have in the events table.
+     * to the create or update methods.
+     * Its mainly the fields that you do not have in the messages table.
+     *
+     * @return array
      */
-    public function getUnsetFields()
+    public function getUnsetFields(): array
     {
-        return ['event_id', 'banner'];
-    }
-
-    /**
-     * This returns the model found in the constructor
-     * or an instance of the class if no event is found.
-     */
-    public function getModel()
-    {
-        return $this->getEvent();
+        return ['event_id'];
     }
 
     /**
@@ -64,10 +63,8 @@ class EventsService extends CRUDServices
             $event->image()->delete();
 
             return $this->successResponse('Banner deleted');
-        } else {
-            return $this->successResponse('This event doesn`t have a banner already');
         }
 
-        return abort(500, 'Error on deleting the banner');
+        return $this->successResponse('This event doesn`t have a banner already');
     }
 }
