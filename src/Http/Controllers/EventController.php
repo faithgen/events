@@ -4,10 +4,10 @@ namespace Innoflash\Events\Http\Controllers;
 
 use Carbon\Carbon;
 use FaithGen\SDK\Helpers\CommentHelper;
+use FaithGen\SDK\Http\Requests\CommentRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Innoflash\Events\Http\Requests\CommentRequest;
 use Innoflash\Events\Http\Requests\CreateRequest;
 use Innoflash\Events\Http\Requests\DeleteRequest;
 use Innoflash\Events\Http\Requests\TogglePublishRequest;

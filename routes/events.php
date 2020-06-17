@@ -7,5 +7,5 @@ Route::prefix('events')->group(function () {
     Route::get('', [EventController::class, 'index']);
     Route::get('{event}', [EventController::class, 'view']);
     Route::get('comments/{event}', [EventController::class, 'comments']);
-    Route::post('comment', [EventController::class, 'comment']);
+    Route::post('comment/{event}', [EventController::class, 'comment']);
 });
