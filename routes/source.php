@@ -10,7 +10,7 @@ Route::prefix('events')
         Route::post('', [EventController::class, 'create']);
         Route::post('update/{event}', [EventController::class, 'update']);
         Route::put('toggle-publish/{event}', [EventController::class, 'togglePublish']);
-        Route::delete('', [EventController::class, 'destroy']);
+        Route::delete('{event}', [EventController::class, 'destroy']);
         Route::delete('banner/{event}', [EventController::class, 'destroyBanner']);
 
         Route::post('add-guest', [GuestController::class, 'create']);

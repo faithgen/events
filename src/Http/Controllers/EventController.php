@@ -167,6 +167,7 @@ class EventController extends Controller
      *
      * @param  Event  $event
      *
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroyBanner(Event $event)
