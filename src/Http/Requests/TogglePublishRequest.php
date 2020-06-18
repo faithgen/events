@@ -2,7 +2,6 @@
 
 namespace Innoflash\Events\Http\Requests;
 
-use FaithGen\SDK\Helpers\Helper;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 use Innoflash\Events\Services\EventsService;

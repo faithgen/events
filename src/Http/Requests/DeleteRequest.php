@@ -15,7 +15,6 @@ class DeleteRequest extends FormRequest
      */
     public function authorize(EventsService $eventsService)
     {
-        dd($eventsService->getEvent());
         return $eventsService->getEvent()
             && $this->user()->can('delete', $eventsService->getEvent());
     }
