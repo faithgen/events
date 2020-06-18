@@ -16,12 +16,10 @@ class EventsService extends CRUDServices
     {
         $this->event = app(Event::class);
 
-        if (request()->has('event_id')) {
-            $this->event = Event::findOrFail(request('event_id'));
-        }
+        $eventId = request()->route('event') ?? request('event_id');
 
-        if (request()->route()->hasParameter('event')) {
-            $this->event = $this->event->resolveRouteBinding(request()->route('event'));
+        if($eventId){
+            $this->event = $this->event->resolveRouteBinding($eventId);
         }
     }
 
