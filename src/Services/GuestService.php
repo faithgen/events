@@ -14,12 +14,10 @@ class GuestService extends CRUDServices
     {
         $this->guest = app(Guest::class);
 
-        if (request()->has('guest_id')) {
-            $this->guest = Guest::findOrFail(request('guest_id'));
-        }
+        $guestId = request()->route('guest') ?? request('guest_id');
 
-        if (request()->route()->hasParameter('guest')) {
-            $this->guest = $this->guest->resolveRouteBinding(request()->route('guest'));
+        if ($guestId) {
+            $this->guest = $this->guest->resolveRouteBinding($guestId);
         }
     }
 

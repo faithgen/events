@@ -18,7 +18,7 @@ class EventsService extends CRUDServices
 
         $eventId = request()->route('event') ?? request('event_id');
 
-        if($eventId){
+        if ($eventId) {
             $this->event = $this->event->resolveRouteBinding($eventId);
         }
     }
